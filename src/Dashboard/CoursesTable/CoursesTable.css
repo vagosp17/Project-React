@@ -1,0 +1,15 @@
+.coursesTable{
+    margin-top: 40px;
+    margin-bottom:150px;
+    background-color: #e3e3e3;
+    border:1px solid #cccccc;
+}
+.coursesTable h4{
+    margin:15px;
+}
+.allCourses{
+    margin:10px;
+}
+.bookable{
+    
+}
