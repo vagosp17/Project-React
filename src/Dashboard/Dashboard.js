@@ -10,7 +10,7 @@ function Dashboard() {
     useEffect(() => {
         axios.get("http://localhost:3001/stats")
         .then((response)=>{
-            console.log(response.data)
+
             setStatistics(response.data)
         })
     }, [])

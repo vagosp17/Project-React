@@ -1,7 +1,8 @@
 import React from 'react'
 import { Card,CardImg,CardBody,CardTitle,CardText, Button } from 'reactstrap';
 import './Course.css'
-function Course({ title, imagePath, price, startDate, endDate, duration,description }) {
+function Course({ title, imagePath, price, startDate, endDate, duration,seeDetails}) {
+    
     return (
         <div >
             <Card className="course" outline color="secondary">
@@ -17,7 +18,7 @@ function Course({ title, imagePath, price, startDate, endDate, duration,descript
                     <CardText>
                         <span className="font-weight-bold">Dates:</span> {startDate} - {endDate}
                     </CardText>
-                    <Button>View</Button>
+                    <Button onClick={seeDetails}>View</Button>
                 </CardBody>
             </Card>
         </div>

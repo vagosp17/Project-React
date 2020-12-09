@@ -10,8 +10,13 @@ ul > a:hover{
 
 }
 
-a {
-    color: white;
-    text-decoration: none;
-}
 
+.nav-brand>a{
+    color:white;
+    text-decoration: none;
+    font-weight: bold;
+}
+.nav-brand>a:hover{
+    color:rgb(214, 199, 199);
+
+}

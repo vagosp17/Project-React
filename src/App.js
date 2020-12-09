@@ -7,9 +7,11 @@ import Header from "./Header/Header";
 // import AllCourses from './AllCourses/AllCourses'
 
 // Pages
-import Home from "./pages/Home";
-import CoursesPage from "./pages/CoursesPage";
+
 import AddNewCourse from "./pages/AddNewCourse";
+import Dashboard from './Dashboard/Dashboard'
+import CourseDetails from './pages/CourseDetails';
+import AllCourses from './AllCourses/AllCourses';
 
 
 function App() {
@@ -20,10 +22,11 @@ function App() {
    <Router>
    <Header/>
      <Switch>
-       <Route  exact path="/"  component={Home} />
-       <Route   path="/pages/Home"  component={Home} />
-       <Route   path="/pages/CoursesPage" component={CoursesPage} />
-       <Route   path="/pages/AddNewCourse" component={AddNewCourse} />
+       <Route  exact path="/"  component={Dashboard} />
+       <Route   path="/Home"  component={Dashboard} />
+       <Route   path="/CoursesPage" component={AllCourses} />
+       <Route   path="/AddNewCourse" component={AddNewCourse} />
+       <Route   path="/CourseDetails/:id" component={CourseDetails}/>
      </Switch>
    </Router>
  
