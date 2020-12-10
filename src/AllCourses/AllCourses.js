@@ -12,13 +12,11 @@ function AllCourses() {
     useEffect(() => {
         axios.get("http://localhost:3001/courses")
             .then((response) => {
-
-               
+                console.log("To apotelesma apo tin All Courses")
                 setCourses(response.data)
             })
     }, [])
     return (
-        
             <div className="allCourses">
                 <Container>
                 <h1 className="text-center">All courses</h1>

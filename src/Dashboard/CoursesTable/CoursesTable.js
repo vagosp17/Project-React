@@ -3,6 +3,8 @@ import { Table,Button } from 'reactstrap';
 import './CoursesTable.css'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom';
+
+
 function CoursesTable() {
     const [courses, setCourses] = useState([]);
     const history=useHistory();

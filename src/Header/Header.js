@@ -1,7 +1,7 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navbar,Nav, NavItem, NavbarBrand} from 'reactstrap';
-import {BrowserRouter as Router,  Switch,  Route, NavLink,Link} from "react-router-dom";
+import { Navbar,Nav, NavbarBrand} from 'reactstrap';
+import {NavLink,Link} from "react-router-dom";
 import './Header.css';
 
 const Header = () => {
