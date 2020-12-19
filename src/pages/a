@@ -34,3 +34,39 @@ for (let j = 0; j < response.data.length; j++) {
       } else {
         setInstructors([...instructors, value]);
       }
+
+              const tempres=[]
+        for (let j = 0; j < response.data.length; j++) {
+          let temp
+          for(let i=0;i<instrLen.length;i++){
+ 
+            if(instrLen[i]===response.data[j].id){
+          
+              temp={
+                id:response.data[j].id,
+                email: response.data[j].email,
+                checked: true,
+                name:{first:response.data[j].name.first,last:response.data[j].name.last},
+                linkedin: response.data[j].linkedin,
+                
+              }
+              break;
+           
+            }else{
+         
+              
+              temp={
+                id:response.data[j].id,
+                email: response.data[j].email,
+                checked: true,
+                name:{first:response.data[j].name.first,last:response.data[j].name.last},
+                linkedin: response.data[j].linkedin,
+                
+              }
+            }
+          }
+
+          tempres.push(temp)
+         
+        }
+        console.log(tempres)

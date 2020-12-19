@@ -49,7 +49,6 @@ const CourseForm = ({
       setOpen(course.open);
       console.log(formInstructors)
       setInstructors(formInstructors)
-
       setDescription(course.description);
       setDates({
         start_date: course.dates.start_date,
@@ -162,7 +161,7 @@ const CourseForm = ({
         <br />
 
         <h3>Instructors</h3>
-        {instructors.map((instructor) => (
+        {formInstructors.map((instructor) => (
           <FormGroup key={instructor.id} controlId={"instructors"}>
             <Input
               type={"checkbox"}
@@ -172,7 +171,7 @@ const CourseForm = ({
               checked={instructor.checked}
             />
             <Label>{`${
-              instructor.name
+              instructor.name.first+" "+instructor.name.last
             } `}</Label>
           </FormGroup>
         ))}

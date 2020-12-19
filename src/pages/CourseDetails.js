@@ -48,10 +48,7 @@ function CourseDetails() {
                 id:response.data[j].id,
                 email: response.data[j].email,
                 checked: true,
-                name:
-                  response.data[j].name.first +
-                  " " +
-                  response.data[j].name.last,
+                name:{first:response.data[j].name.first,last:response.data[j].name.last},
                 linkedin: response.data[j].linkedin,
                 
               }
@@ -64,10 +61,7 @@ function CourseDetails() {
                 id:response.data[j].id,
                 email: response.data[j].email,
                 checked: false,
-                name:
-                  response.data[j].name.first +
-                  " " +
-                  response.data[j].name.last,
+                name:{first:response.data[j].name.first,last:response.data[j].name.last},
                 linkedin: response.data[j].linkedin,
                 
               }
