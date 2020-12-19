@@ -15,17 +15,23 @@ const AddNewCourse = () =>{
     axios.get(`http://localhost:3001/courses`).then((response) => {
       setNewCourseId(response.data.length + 1);
     });
-    axios.get(`http://localhost:3001/instructors`).then((response) => {
-      console.log(response.data)
-      setInstructors(response.data);
-    });
+
+    const getInst=async()=>{
+      const res=await axios.get(`http://localhost:3001/instructors`)
+      setInstructors(res.data);
+    }
+    getInst()
   }, [])
 
   const addCourse = async (data) => {
-    console.log(data)
+
+    const formData={
+      ...data,
+      instructors:data.instructors.filter((ins)=>ins.checked).map((ins)=>ins.id)
+    }
     await axios
       .post(API, {
-        ...data,
+        ...formData,
         id: newCourseId,
       })
       .then((res) => {

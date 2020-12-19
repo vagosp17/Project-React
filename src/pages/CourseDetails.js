@@ -22,6 +22,7 @@ function CourseDetails() {
   const [showModal, setShowModal] = useState(false);
   const [course, setCourse] = useState({});
   const [instr, setInstr] = useState([]);
+  
  
   const [editModal, setEditModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
@@ -94,7 +95,7 @@ function CourseDetails() {
     });
    
 
-  }, []);
+  }, [editModal]);
 
   const deleteCourse = async (id) => {
     // console.log("To id tou course :" + id);
@@ -104,12 +105,19 @@ function CourseDetails() {
   };
 
   const editCourse = async (data) => {
+    
+    const formData={
+      ...data,
+      instructors:data.instructors.filter((ins)=>ins.checked).map((ins)=>ins.id)
+    }
+    console.log(formData)
     await axios
-      .put(`http://localhost:3001/courses/${course.id}`, { ...data })
+      .put(`http://localhost:3001/courses/${course.id}`, formData )
       .then((res) => {
         setEditModal(!editModal);
-        console.log(res.data);
+        
       });
+    //axios get 
   };
 
   const toggleEditModal = () => {
@@ -118,7 +126,7 @@ function CourseDetails() {
   const toggleDeleteModal = () => {
     setDeleteModal(!deleteModal);
   };
-
+  
   return (
     <Container>
       {/* <pageId/> */}
@@ -162,7 +170,7 @@ function CourseDetails() {
           showModal={editModal}
           toggleModal={toggleEditModal}
         >
-          <CourseForm course={course} editCourse={editCourse} formInstructors={instr} courseInstr={instr}/>
+          <CourseForm course={course} editCourse={editCourse} formInstructors={instr} />
         </PopUp>
         </div>
         <div class="btn-option ">

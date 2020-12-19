@@ -14,8 +14,7 @@ const CourseForm = ({
   const [duration, setDuration] = useState("");
   const [imagePath, setImagePath] = useState("");
   const [open, setOpen] = useState(false);
-  const [instructors, setInstructors] = useState([]);
-  // const [formInstructors,setFormInstructors]=useState([])
+  const [instructors, setInstructors] = useState(formInstructors);
   const [description, setDescription] = useState("");
   const [dates, setDates] = useState({
     start_date: "",
@@ -40,15 +39,12 @@ const CourseForm = ({
   const { normal, early_bird } = price;
 
   useEffect(() => {
-    console.log(course);
 
     if (course) {
       setTitle(course.title);
       setDuration(course.duration);
       setImagePath(course.imagePath);
       setOpen(course.open);
-      console.log(formInstructors)
-      setInstructors(formInstructors)
       setDescription(course.description);
       setDates({
         start_date: course.dates.start_date,
@@ -59,16 +55,26 @@ const CourseForm = ({
         early_bird: course.price.early_bird,
       });
     } else {
+      setInstructors(formInstructors)
     }
-  }, []);
+  }, [course,formInstructors]);
 
   const onInputChange = (event, setState) => {
     const { name, value } = event.target;
 
     if (name === "instructors") {
-      console.log(event.target)
-      console.log(event.target.checked)
-      console.log(event.target.name)
+      
+      setState((inst) => {
+        return inst.map((element)=>({
+            ...element,
+            checked:event.target.value===element.id?!element.checked:element.checked
+          }
+        ))
+          
+        
+      });
+
+
     } else if (name === "start_date" || name === "end_date") {
       setState((dates) => {
         return {
@@ -89,7 +95,7 @@ const CourseForm = ({
       setState(event.target.value);
     }
   };
-
+  console.log(instructors)
   return (
     <div>
       <Form className="form">
@@ -161,7 +167,7 @@ const CourseForm = ({
         <br />
 
         <h3>Instructors</h3>
-        {formInstructors.map((instructor) => (
+        {instructors.map((instructor) => (
           <FormGroup key={instructor.id} controlId={"instructors"}>
             <Input
               type={"checkbox"}

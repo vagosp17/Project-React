@@ -33,7 +33,8 @@
         "end_date": "2019-09-28"
       },
       "instructors": [
-        "02","01"
+        "02",
+        "01"
       ],
       "price": {
         "normal": 1100,
@@ -43,7 +44,7 @@
     },
     {
       "title": "User eXperience (UX) Research",
-      "duration": "4 Fridays and 4 Saturdays",
+      "duration": "3 Fridays and 4 Saturdays",
       "imagePath": "/ui-ux.png",
       "description": "ooklkopkop",
       "open": true,
@@ -99,21 +100,23 @@
       "description": "<p>This is a certified program by Athens Tech College, the first educational institution in Greece that specialises in computer science and ICT studies.</p><p>Participant’s registration (payment’s completion) implies full compliance and acceptance of Code.Learn Terms &amp; Conditions.</p>"
     },
     {
-      "title": "Sahr hw  a",
-      "duration": "A aa yag",
-      "imagePath": "Gghlhahma a",
-      "description": "Poafocot mu kotni napsofow edi coc fadofzig etalog lapihhil odgeniv ditam etarij sippul peze hop miknud nolbikur. Baozavem kudojtu pajgajhad hekavige maec lojcaih maunu belviinu wemivcat mazo suposasip lowe lokoz volus hivna fu buwde wehdu. Botuw tapirvif pa ow wiitu opoan jivgi kilo zodozlej pudku mo ",
-      "open": false,
-      "dates": {
-        "start_date": "Aa eghavyos a h",
-        "end_date": "Teob"
-      },
-      "instructors": [],
+      "id": "03",
+      "title": "Angular",
+      "imagePath": "/angular.png",
       "price": {
-        "normal": "T alnrna hg",
-        "early_bird": "NtutehA"
+        "normal": 450,
+        "early_bird": 400
       },
-      "id": 5
+      "dates": {
+        "start_date": "2020-10-12",
+        "end_date": "2020-10-18"
+      },
+      "duration": "2 Wednesdays and 3 Saturdays",
+      "open": true,
+      "instructors": [
+        "02"
+      ],
+      "description": "<p>This code.learn program&nbsp;covers introductory and advanced <strong>Angular</strong> topics through extensive hands-on sessions and guidance from senior developers.</p>"
     }
   ],
   "instructors": [
