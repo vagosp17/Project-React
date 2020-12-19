@@ -28,11 +28,12 @@ function AllCourses() {
                                 key={course.id}
                                 title={course.title}
                                 imagePath={course.imagePath}
-                                price={course.price.normal}
+                                price={course.price?.normal}
                                 startDate={course.dates.start_date}
                                 endDate={course.dates.end_date}
                                 description={course.description}
                                 duration={course.duration}
+                                open={course.open}
                                 seeDetails={()=>history.push(`/CourseDetails/`+course.id+``)}
                             />
                         </Col>

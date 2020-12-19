@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card,CardImg,CardBody,CardTitle,CardText, Button } from 'reactstrap';
 import './Course.css'
-function Course({ title, imagePath, price, startDate, endDate, duration,seeDetails}) {
+function Course({ title, imagePath, price, startDate, endDate, duration,seeDetails,open}) {
     
     return (
         <div >
@@ -10,7 +10,7 @@ function Course({ title, imagePath, price, startDate, endDate, duration,seeDetai
                 <CardBody>
                     <CardTitle className="font-weight-bold" tag="h5">{title}</CardTitle>
                     <CardText>
-                        <span className="font-weight-bold">Price: </span>{price} | <span className="font-weight-bold">Bookable:</span> ✅
+                        <span className="font-weight-bold">Price: </span>{price} | <span className="font-weight-bold">Bookable:{open?"✅":"❌"}</span>
                     </CardText>
                     <CardText>
                     <span className="font-weight-bold">Duration: </span>{duration}

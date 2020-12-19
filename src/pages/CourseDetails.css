@@ -1,6 +1,5 @@
-.course-btn > btn btn-danger{
-    display:inline-block;
-    text-align: center;
+.btn-selections>.btn-option{
+    display: inline-block;
 }
 
 .connection > linked-link {
@@ -13,18 +12,29 @@
     height: 150px;
 }
 
-.course-btn{
+.course-title{
+    padding-top:2vw;
+}
+
+.course-details{
+    padding-top: 2vw;
+    padding-bottom: 2vw;
+}
+
+
+/* .course-btn{
     display:flex;
     flex-direction:row;
     flex-wrap:nowrap;   
+    padding-bottom: 5vw;
+} */
 
-}
-
-.course-btn > del-btn{
-padding-left: 20px;
-}
+/* .delete-btn{
+margin-left: 10px;
+} */
 
 
 .bio{
-    margin-bottom: 100px;
+    padding-top:2vw;
+    margin-bottom: 5vw;
 }

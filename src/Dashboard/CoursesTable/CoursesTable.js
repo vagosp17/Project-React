@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 function CoursesTable() {
     const [courses, setCourses] = useState([]);
     const history=useHistory();
+
     useEffect(() => {
         axios.get("http://localhost:3001/courses")
             .then((response) => {
@@ -20,6 +21,7 @@ function CoursesTable() {
                 setCourses(temp)
             })
     }, [])
+
     return (
         <div className="coursesTable">
             <h4>Last 5 courses</h4>
@@ -39,9 +41,9 @@ function CoursesTable() {
                         <tr key={course.id}>
                             <th scope="row">ℹ</th>
                             <td>{course.title}</td>
-                            <td className="">✅</td>
+                            <td className="">{course.open?"✅":"❌"}</td>
                             <td>{course.price.normal}€</td>
-                            <td>{course.dates.start_date}-{course.dates.end_date}</td>
+                            <td>{course?.dates?.start_date}-{course?.dates?.end_date}</td>
                             <td><Button onClick={()=>history.push("/CourseDetails/"+course.id+"")} color="primary">View Details</Button></td>
                         </tr>
                     ))}

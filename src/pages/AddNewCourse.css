@@ -1,0 +1,18 @@
+/* .form{
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-top: 5%;
+
+} */
+
+.add-new-course{
+    
+    margin:100px;
+
+    border:1px solid gray ;
+}
+
+
+.form__title{
+    margin-bottom: 40px;
+}

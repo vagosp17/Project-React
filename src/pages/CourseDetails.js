@@ -1,134 +1,221 @@
-import { Row, Col,Container,Button, NavLink ,CardImg} from 'reactstrap';
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import {useParams } from "react-router-dom";
-import './CourseDetails.css' 
-
-
+import {
+  Row,
+  Col,
+  Container,
+  Button,
+  NavLink,
+  CardImg,
+  Link,
+  Badge,
+} from "reactstrap";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useHistory, useParams } from "react-router-dom";
+import "./CourseDetails.css";
+import CourseForm from "./CourseForm";
+import { API } from "../api";
+import PopUp from "./PopUp";
 
 function CourseDetails() {
-    
-    const {idCourse} = useParams();
-
-    function BlogPost() {
-        return <div>ID Course:{idCourse}</div>;
-      }
-
-     //Kanw fetch ta courses  
-    const [course, setCourse] = useState([])   
-    useEffect(() => {
-        axios.get("http://localhost:3001/courses")
-            .then((response) => {
-                console.log(response)
-                
-            for (let i=0; i<response.data.length; i++)
-            {
-                if ( response.data[i].id === idCourse)
-                {
-                    setCourse(response.data[i])               
-                }
-            }
-
-            })
-    }, [])
-
-    console.log("To course einai:" )
-    console.log(course)
-    console.log("To course exei tous instructures:") 
-    console.log(course.instructors)
-
-    //Kanw fetch tous instructores
-    const [instr, setInstr] = useState([])
-    useEffect(() => {
-        axios.get("http://localhost:3001/instructors")
-            .then((response) => {
-                console.log("Apandisi apo to response tou instr")
-                console.log(response)
-            
-            for (let i=0; i<response.data.length; i++){
-                if ( response.data[i].id === idCourse){
-                    setInstr(response.data[i])
-
-                }
-            }
-
-            })
-    }, [])
-
-    console.log("O instr einai:" )
-    console.log(instr)
-    // console.log("To onoma tou einai:" )
-    // console.log(instr.name.first)
+  let history = useHistory();
+  const { idCourse } = useParams();
+  const [showModal, setShowModal] = useState(false);
+  const [course, setCourse] = useState({});
+  const [instr, setInstr] = useState([]);
  
-    // console.log(course.imagePath)
+  const [editModal, setEditModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
 
-    // const instrFirstName = JSON.stringify(instr.name.first);
-    // const instrLastName = JSON.stringify(instr.name.last);
-    // console.log(myObjStr)
-    console.log("To mail tou:")
-    console.log(instr.email)
+  useEffect(() => {
+    axios.get(`http://localhost:3001/courses/${idCourse}`).then((response) => {
+      //   console.log(response);
 
-    return (
-    <Container>
-         <BlogPost/>
-        {/* O titlos tou mathimatos */}
-       <h1>{course.title} ({idCourse})</h1> 
-        
-        {/* H eikona tou mathimatos */}
-       <CardImg className="course-img " src={course.imagePath} alt="img"/> 
-        <hr/>
-        
-        {/* Oi plirofories tou mathimatos price/duration/bookable/dates]*/}
-        <div className="course-details">
-        <Row>
-        {/* <Col xs="6"> Price: {course.price.normal}€</Col> */}
-        <Col xs="6" >Duration: {course.duration}</Col>
-      </Row>
+      setCourse(response.data);
+
+      const instrLen=response.data.instructors
+
+      axios.get("http://localhost:3001/instructors").then((response) => {
+        //   console.log("Apandisi apo to response tou instr");
+        //   console.log(response);
+        const tempres=[]
+        for (let j = 0; j < response.data.length; j++) {
+          let temp
+          for(let i=0;i<instrLen.length;i++){
+ 
+            if(instrLen[i]===response.data[j].id){
+          
+              temp={
+                id:response.data[j].id,
+                email: response.data[j].email,
+                checked: true,
+                name:
+                  response.data[j].name.first +
+                  " " +
+                  response.data[j].name.last,
+                linkedin: response.data[j].linkedin,
+                
+              }
+              break;
+           
+            }else{
+         
+              
+              temp={
+                id:response.data[j].id,
+                email: response.data[j].email,
+                checked: false,
+                name:
+                  response.data[j].name.first +
+                  " " +
+                  response.data[j].name.last,
+                linkedin: response.data[j].linkedin,
+                
+              }
+            }
+          }
+
+          tempres.push(temp)
+         
+        }
+        console.log(tempres)
+         setInstr(tempres)
+      
+  
+      })
+    //   for(let i=0;i<response.data.instructors.length;i++){
+    //     axios.get(`http://localhost:3001/instructors?id=${response.data.instructors[i]}`).then((response)=>{
+         
+    //       let temp={
+    //         email:response.data[0].email,
+    //         checked:true,
+    //         name:response.data[0].name.first+" "+response.data[0].name.last,
+    //         linkedin:response.data[0].linkedin
+    //       }
+
+    //       console.log(temp)
+    //       
+    //     })
+    // }
      
-      <Row>
-      <Col xs="6" >Bookable: ✅</Col>
-      {/* <Col xs="6"> Dates:{course.dates.start_date} : {course.dates.end_date}</Col> */}
-      </Row>
+    });
+   
+
+  }, []);
+
+  const deleteCourse = async (id) => {
+    // console.log("To id tou course :" + id);
+    await axios.delete(`${API}/${course.id}`).then((response) => {
+      history.push("/CoursesPage");
+    });
+  };
+
+  const editCourse = async (data) => {
+    await axios
+      .put(`http://localhost:3001/courses/${course.id}`, { ...data })
+      .then((res) => {
+        setEditModal(!editModal);
+        console.log(res.data);
+      });
+  };
+
+  const toggleEditModal = () => {
+    setEditModal(!editModal);
+  };
+  const toggleDeleteModal = () => {
+    setDeleteModal(!deleteModal);
+  };
+
+  return (
+    <Container>
+      {/* <pageId/> */}
+      {/* O titlos tou mathimatos */}
+      <div className="course-title">
+        <h1>
+          {course.title} ({idCourse})
+        </h1>
       </div>
 
-     
-        {/*H perigrafafi tou course */}
-        {/* <div dangerouslySetInnerHTML={ {__html: {course.description} } }/> */}
-       <p>{course.description}</p>
-        
-           
+      {/* H eikona tou mathimatos */}
+      <CardImg className="course-img " src={course.imagePath} alt="img" />
+      <hr />
 
-            {/* {courses.map(course => (
-                 <p>{course.id}</p> )                      
-            )} */}
-        
+      <div className="course-details">
+        <Row>
+          <Col xs="6"> Price: {course?.price?.normal}€</Col>
+          <Col xs="6">Duration: {course.duration}</Col>
+        </Row>
+
+        <Row>
+          <Col xs="6">Bookable: {course.open?"✅":"❌"}</Col>
+          <Col xs="6">
+            {" "}
+            Dates: {course?.dates?.start_date} : {course?.dates?.end_date}
+          </Col>
+        </Row>
+      </div>
+
+      <div className="course-description">
+        <p>{course.description}</p>
+      </div>
+
+      <div className="btn-selections">
+          <div class="btn-option ">
+        <PopUp
+          header={"Edit Course"}
+          color={"primary"}
+          btn_label={"Edit"}
+
+          showModal={editModal}
+          toggleModal={toggleEditModal}
+        >
+          <CourseForm course={course} editCourse={editCourse} formInstructors={instr} courseInstr={instr}/>
+        </PopUp>
+        </div>
+        <div class="btn-option ">
+        <PopUp
+          footer={
+            <div>
+              <Button color="secondary" onClick={()=>toggleDeleteModal()}>Cancel</Button>
+              <Button color="danger" onClick={() => deleteCourse(idCourse)}>
+                Delete
+              </Button>
+            </div>
+          }
+          header={"Delete Course"}
+          color={"danger"}
+          btn_label={"Delete"}
+          showModal={deleteModal}
+          toggleModal={toggleDeleteModal}
+        >
+          Do you want to remove?
+        </PopUp>
+        </div>
+      </div>
+
+      <h2>Instructors</h2>
+
+      <div className="connection">
+        {instr.map(instructor=>(
+          instructor.checked&&
+                  <span>
+                  Email: {instructor.email} |{" "}
+                  <Badge href={instructor.linkedin} color="primary">
+                    LinkedIn
+                  </Badge>
+                  <br/>
+                </span>
                 
-        {/* {
-          course.map(function(course, idCourse)
-          {
-            return <div key={idCourse}>{course.title}</div>
-          })  
-        }  */}
-        
-        <div className="course-btn">
-        <div className="edit-btn"><Button color="primary">Edit</Button>{' '}</div>   
-        <div className="del-btn"><Button color="danger">Delete</Button>{' '}</div>
-        </div>
+        ))}
 
-        <h2>Instructors</h2>
-        {/* <h4>{instrFirstName} {instrLastName} ({instr.dob})</h4> */}
+      </div>
 
-        <div className="connection">
-           <span>Email: {instr.email} | <NavLink  href={instr.linkedin}>LinkedIn</NavLink></span>
-        </div>
-
-        <span className="bio">{instr.bio}</span>
-
+      <div className="bio">
+        <span>{instr.bio}</span>
+      </div>
     </Container>
-    )
+  );
 }
 
-export default CourseDetails
-
+export default CourseDetails;
 
 

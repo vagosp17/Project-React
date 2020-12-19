@@ -7,10 +7,11 @@ import Header from "./Header/Header";
 // import AllCourses from './AllCourses/AllCourses'
 
 // Pages
-import AddNewCourse from "./pages/AddNewCourse";
+import CourseForm from "./pages/CourseForm";
 import Dashboard from './Dashboard/Dashboard'
 import CourseDetails from './pages/CourseDetails';
 import AllCourses from './AllCourses/AllCourses';
+import AddNewCourse from './pages/AddNewCourse';
 
 function App() {
 
